@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:utspam_c3_if5a_0018/models/rental_model.dart';
 import 'package:utspam_c3_if5a_0018/models/user_model.dart';
 import 'package:utspam_c3_if5a_0018/services/local_storage.dart';
 import 'package:utspam_c3_if5a_0018/theme/app_theme.dart';
@@ -88,7 +89,21 @@ class _RentalFormScreenState extends State<RentalFormScreen> {
 
   void _submitRental() async {
     if (_formKey.currentState!.validate()) {
-      
+      final rental = Rental(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        carId: _selectedCar!['id'],
+        carName: _selectedCar!['name'],
+        carType: _selectedCar!['type'],
+        carImage: _selectedCar!['image'],
+        customerName: _customerNameController.text,
+        duration: int.parse(_durationController.text),
+        startDate: DateFormat('dd/MM/yyyy').parse(_startDateController.text),
+        totalCost: _totalCost,
+        status: RentalStatus.active,
+      );
+
+      await LocalStorageService.saveRental(rental);
+
       // Show success dialog
       await _showSuccessDialog();
       
