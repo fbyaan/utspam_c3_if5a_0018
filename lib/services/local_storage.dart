@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:utspam_c3_if5a_0018/models/user_model.dart';
+import 'package:utspam_c3_if5a_0018/models/rental_model.dart';
 
 class LocalStorageService {
   static const String _userKey = 'current_user';
@@ -43,7 +44,51 @@ class LocalStorageService {
     return null;
   }
 
-  
+  // Rental Management
+  static Future<void> saveRental(Rental rental) async {
+    final prefs = await SharedPreferences.getInstance();
+    final rentals = await getRentals();
+    rentals.add(rental);
+    
+    final rentalsData = rentals.map((r) => _rentalToMap(r)).toList();
+    await prefs.setStringList(_rentalsKey, rentalsData.map((m) => m.toString()).toList());
+  }
+
+  static Future<List<Rental>> getRentals() async {
+    final prefs = await SharedPreferences.getInstance();
+    final rentalsData = prefs.getStringList(_rentalsKey) ?? [];
+    
+    return rentalsData.map((data) {
+      final map = _parseMapString(data);
+      return Rental(
+        id: map['id'],
+        carId: map['carId'],
+        carName: map['carName'],
+        carType: map['carType'],
+        carImage: map['carImage'],
+        customerName: map['customerName'],
+        duration: int.parse(map['duration']),
+        startDate: DateTime.parse(map['startDate']),
+        totalCost: double.parse(map['totalCost']),
+        status: RentalStatus.values.firstWhere(
+          (e) => e.toString() == map['status'],
+        ),
+      );
+    }).toList();
+  }
+
+  static Future<void> updateRental(Rental updatedRental) async {
+    final prefs = await SharedPreferences.getInstance();
+    final rentals = await getRentals();
+    final index = rentals.indexWhere((r) => r.id == updatedRental.id);
+    
+    if (index != -1) {
+      rentals[index] = updatedRental;
+      final rentalsData = rentals.map((r) => _rentalToMap(r)).toList();
+      await prefs.setStringList(_rentalsKey, rentalsData.map((m) => m.toString()).toList());
+    }
+  }
+
   // Helper methods
   static Map<String, dynamic> _parseMapString(String mapString) {
     final result = <String, dynamic>{};
@@ -61,6 +106,20 @@ class LocalStorageService {
     return result;
   }
 
+  static Map<String, dynamic> _rentalToMap(Rental rental) {
+    return {
+      'id': rental.id,
+      'carId': rental.carId,
+      'carName': rental.carName,
+      'carType': rental.carType,
+      'carImage': rental.carImage,
+      'customerName': rental.customerName,
+      'duration': rental.duration.toString(),
+      'startDate': rental.startDate.toIso8601String(),
+      'totalCost': rental.totalCost.toString(),
+      'status': rental.status.toString(),
+    };
+  }
 
   Future login(String text, String text2) async {}
 }
