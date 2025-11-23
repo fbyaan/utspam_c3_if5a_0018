@@ -14,7 +14,7 @@ class _CarListScreenState extends State<CarListScreen> {
       "id": "1",
       "name": "Land Rover Defender",
       "type": "Luxury Off-Road",
-      "image": "assets/defender.png",
+      "image": "assets/land_rover_defender.jpg",
       "price": 2200000,
       "rating": 4.8,
       "transmission": "Automatic",
@@ -24,7 +24,7 @@ class _CarListScreenState extends State<CarListScreen> {
       "id": "2",
       "name": "Mercedes-Benz G-Class",
       "type": "Luxury SUV Off-Road",
-      "image": "assets/gclass.png",
+      "image": "assets/mercedes_benz_gclass.jpg",
       "price": 3200000,
       "rating": 4.9,
       "transmission": "Automatic",
@@ -34,7 +34,7 @@ class _CarListScreenState extends State<CarListScreen> {
       "id": "3",
       "name": "Toyota Land Cruiser 70 Series",
       "type": "Legendary Off-Road",
-      "image": "assets/lc70.png",
+      "image": "assets/lc70.jpg",
       "price": 1500000,
       "rating": 4.7,
       "transmission": "Manual",
@@ -44,7 +44,7 @@ class _CarListScreenState extends State<CarListScreen> {
       "id": "4",
       "name": "Jeep Wrangler Rubicon",
       "type": "Hardcore Off-Road",
-      "image": "assets/wrangler.png",
+      "image": "assets/wrangler.jpg",
       "price": 1200000,
       "rating": 4.6,
       "transmission": "Manual",
@@ -54,7 +54,7 @@ class _CarListScreenState extends State<CarListScreen> {
       "id": "5",
       "name": "Ford Bronco Raptor",
       "type": "Performance Off-Road",
-      "image": "assets/bronco.png",
+      "image": "assets/ford_bronco_raptor.jpg",
       "price": 1900000,
       "rating": 4.7,
       "transmission": "Automatic",
@@ -64,7 +64,7 @@ class _CarListScreenState extends State<CarListScreen> {
       "id": "6",
       "name": "Toyota 4Runner TRD Pro",
       "type": "Adventure SUV",
-      "image": "assets/4runner.png",
+      "image": "assets/4runner.jpg",
       "price": 1300000,
       "rating": 4.5,
       "transmission": "Automatic",
@@ -74,7 +74,7 @@ class _CarListScreenState extends State<CarListScreen> {
       "id": "7",
       "name": "Land Rover Discovery",
       "type": "Luxury Off-Road",
-      "image": "assets/discovery.png",
+      "image": "assets/discovery.jpg",
       "price": 1800000,
       "rating": 4.6,
       "transmission": "Automatic",
@@ -82,12 +82,12 @@ class _CarListScreenState extends State<CarListScreen> {
     },
     {
       "id": "8",
-      "name": "Toyota Fortuner",
-      "type": "Adventure SUV",
-      "image": "assets/fortuner.png",
-      "price": 900000,
+      "name": "Lexus GX 460",
+      "type": "Luxury Off-Road",
+      "image": "assets/lexus_gx_460.jpg",
+      "price": 1700000,
       "rating": 4.4,
-      "transmission": "Manual",
+      "transmission": "Automatic",
       "seats": 7
     }
   ];
@@ -155,7 +155,7 @@ class _CarListScreenState extends State<CarListScreen> {
         backgroundColor: AppTheme.primaryDark,
         elevation: 0,
         title: Text(
-          'Daftar Mobil',
+          'Daftar Mobil ',
           style: TextStyle(
             color: AppTheme.textPrimary,
             fontSize: 24,
@@ -705,6 +705,7 @@ class _CarListScreenState extends State<CarListScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Car Image
+                    // Car Image
                     Container(
                       width: 120,
                       height: 100,
@@ -720,11 +721,21 @@ class _CarListScreenState extends State<CarListScreen> {
                           ],
                         ),
                       ),
-                      child: Center(
-                        child: Icon(
-                          Icons.directions_car,
-                          size: 50,
-                          color: AppTheme.accentColor,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.asset(
+                          car['image'],
+                          fit: BoxFit.cover,  // Agar gambar menutupi container tanpa distorsi
+                          errorBuilder: (context, error, stackTrace) {
+                            // Placeholder jika gambar gagal dimuat
+                            return Center(
+                              child: Icon(
+                                Icons.directions_car,
+                                size: 50,
+                                color: AppTheme.accentColor,
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),

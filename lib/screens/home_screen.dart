@@ -267,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'price': 2200000,
         'seats': 6,
         'transmission': 'Manual',
-        'image': 'assets/Land Rover Defender.jpg',
+        'image': 'assets/land_rover_defender.jpg',
       },
       {
         'name': 'Lexus GX 460',
@@ -275,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'price': 1700000,
         'seats': 7,
         'transmission': 'Automatic',
-        'image': 'assets/Lexus GX 460.jpg',
+        'image': 'assets/lexus_gx_460.jpg',
       },
       {
         'name': 'Ford Bronco Raptor',
@@ -283,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'price': 2100000,
         'seats': 5,
         'transmission': 'Automatic',
-        'image': 'assets/Ford Bronco Raptor.jpg',
+        'image': 'assets/ford_bronco_raptor.jpg',
       },
     ];
 
