@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:utspam_c3_if5a_0018/screens/register_screen.dart';
+import 'package:utspam_c3_if5a_0018/screens/rental_form_screen.dart';
 import 'package:utspam_c3_if5a_0018/theme/app_theme.dart';
 import 'package:utspam_c3_if5a_0018/screens/login_screen.dart';
 import 'package:utspam_c3_if5a_0018/screens/home_screen.dart'; 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/home': (context) => HomeScreen(),
         '/car-list': (context) => CarListScreen(),
+        '/rental-form': (context) => RentalFormScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
