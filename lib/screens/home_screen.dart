@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:utspam_c3_if5a_0018/models/user_model.dart';
 import 'package:utspam_c3_if5a_0018/services/local_storage.dart';
 import 'package:utspam_c3_if5a_0018/theme/app_theme.dart';
+import 'package:utspam_c3_if5a_0018/screens/car_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -167,14 +168,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text(
-              'Semua',
-              style: TextStyle(
-                color: AppTheme.accentColor,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
           ],
         ),
         SizedBox(height: 16),
@@ -208,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icons.logout,
               title: 'Logout',
               color: Colors.pink,
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, '/login'),
             ),
           ],
         ),
@@ -338,6 +331,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  String formatRupiah(int number) {
+    return number.toString().replaceAllMapped(
+      RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
+      (Match m) => '${m[1]}.',
+    );
+  }
+
   Widget _buildCarCard(Map<String, dynamic> car) {
     final imagePath = car['image'] as String?;
     final isNetworkImage = imagePath != null && imagePath.startsWith('http');
@@ -446,10 +446,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Rp ${car['price']} / hari',
+                            'Rp ${formatRupiah(car['price'])} / hari',
                             style: TextStyle(
                               color: AppTheme.accentColor,
-                              fontSize: 14,
+                              fontSize: 13,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -480,7 +480,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
   Widget _buildCarFeature(IconData icon, String text) {
     return Row(
       children: [

@@ -3,6 +3,7 @@ import 'package:utspam_c3_if5a_0018/screens/register_screen.dart';
 import 'package:utspam_c3_if5a_0018/theme/app_theme.dart';
 import 'package:utspam_c3_if5a_0018/screens/login_screen.dart';
 import 'package:utspam_c3_if5a_0018/screens/home_screen.dart'; 
+import 'package:utspam_c3_if5a_0018/screens/car_list_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterScreen(),
         '/login': (context) => LoginScreen(),
         '/home': (context) => HomeScreen(),
+        '/car-list': (context) => CarListScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
