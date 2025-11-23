@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:utspam_c3_if5a_0018/screens/profile_screen.dart';
 import 'package:utspam_c3_if5a_0018/screens/register_screen.dart';
 import 'package:utspam_c3_if5a_0018/screens/rental_form_screen.dart';
 import 'package:utspam_c3_if5a_0018/screens/rental_history_screen.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/car-list': (context) => CarListScreen(),
         '/rental-form': (context) => RentalFormScreen(),
         '/rental-history': (context) => RentalHistoryScreen(),
+        '/profile': (context) => ProfileScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
