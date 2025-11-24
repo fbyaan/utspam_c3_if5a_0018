@@ -172,17 +172,6 @@ class _RentalDetailScreenState extends State<RentalDetailScreen> {
       backgroundColor: AppTheme.primaryDark,
       appBar: AppBar(
         title: Text('Detail Penyewaan'),
-        actions: [
-          // Refresh button
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () {
-              // Force reload current rental data
-              _reloadRentalData();
-            },
-            tooltip: 'Refresh Data',
-          ),
-        ],
       ),
       body: _isUpdating
           ? Center(

@@ -167,14 +167,7 @@ class _CarListScreenState extends State<CarListScreen> {
           icon: Icon(Icons.arrow_back, color: AppTheme.textPrimary),
           onPressed: () => Navigator.pop(context),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search, color: AppTheme.textPrimary),
-            onPressed: () {
-              // Search functionality
-            },
-          ),
-        ],
+        
       ),
       body: Column(
         children: [

@@ -276,11 +276,13 @@ class _EditRentalScreenState extends State<EditRentalScreen> {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Center(
-              child: Icon(
-                Icons.directions_car,
-                size: 40,
-                color: AppTheme.accentColor,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                _rental!.carImage,
+                fit: BoxFit.cover,
               ),
+             ),
             ),
           ),
           SizedBox(width: 16),
