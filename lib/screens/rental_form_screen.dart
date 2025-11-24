@@ -273,11 +273,11 @@ class _RentalFormScreenState extends State<RentalFormScreen> {
                 ],
               ),
             ),
-            child: Center(
-              child: Icon(
-                Icons.directions_car,
-                size: 40,
-                color: AppTheme.accentColor,
+             child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(
+                _selectedCar!['image'],
+                fit: BoxFit.cover,
               ),
             ),
           ),
