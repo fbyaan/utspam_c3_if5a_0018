@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:utspam_c3_if5a_0018/theme/app_theme.dart';
 
 class CarListScreen extends StatefulWidget {
@@ -103,7 +104,7 @@ class _CarListScreenState extends State<CarListScreen> {
   // Available filter options
   final List<String> _carTypes = ['All', 'Luxury Off-Road', 'Luxury SUV Off-Road', 'Legendary Off-Road', 'Hardcore Off-Road', 'Performance Off-Road', 'Adventure SUV'];
   final List<String> _transmissions = ['All', 'Manual', 'Automatic'];
-  final List<String> _seatsOptions = ['All', '4', '5', '6'];
+  final List<String> _seatsOptions = ['All', '4', '5', '6', '7'];
 
   List<Map<String, dynamic>> get _filteredCars {
     return _cars.where((car) {
@@ -274,7 +275,7 @@ class _CarListScreenState extends State<CarListScreen> {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    _hasActiveFilters ? 'Filter aktif' : 'Temukan mobil off-road impian',
+                    _hasActiveFilters ? 'Filter aktif' : 'Temukan mobil yang di inginkan',
                     style: TextStyle(
                       color: _hasActiveFilters ? AppTheme.accentColor : AppTheme.textSecondary,
                       fontSize: 12,
@@ -330,12 +331,15 @@ class _CarListScreenState extends State<CarListScreen> {
               });
             }),
           if (_minPrice > 0 || _maxPrice < 5000000)
-            _buildFilterChip('Harga: Rp ${(_minPrice / 1000000).toStringAsFixed(1)}JT - Rp ${(_maxPrice / 1000000).toStringAsFixed(1)}JT', () {
-              setState(() {
-                _minPrice = 0;
-                _maxPrice = 5000000;
+            _buildFilterChip(
+              'Harga: ${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0).format(_minPrice)} - ${NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0).format(_maxPrice)}',
+              () {
+                setState(() {
+                  _minPrice = 0;
+                  _maxPrice = 5000000;
               });
-            }),
+            }
+          ),
         ],
       ),
     );
@@ -415,34 +419,7 @@ class _CarListScreenState extends State<CarListScreen> {
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Car Type Filter
-                  _buildFilterSectionTitle('Tipe Mobil'),
-                  SizedBox(height: 12),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: _carTypes.map((type) {
-                      return FilterChip(
-                        label: Text(type),
-                        selected: _selectedType == type,
-                        onSelected: (selected) {
-                          setState(() {
-                            _selectedType = selected ? type : 'All';
-                          });
-                        },
-                        backgroundColor: AppTheme.primaryDark,
-                        selectedColor: AppTheme.accentColor.withOpacity(0.2),
-                        labelStyle: TextStyle(
-                          color: _selectedType == type ? AppTheme.accentColor : AppTheme.textPrimary,
-                        ),
-                        checkmarkColor: AppTheme.accentColor,
-                      );
-                    }).toList(),
-                  ),
-
-                  SizedBox(height: 24),
-
+                children: [  
                   // Transmission Filter
                   _buildFilterSectionTitle('Transmisi'),
                   SizedBox(height: 12),
@@ -471,34 +448,34 @@ class _CarListScreenState extends State<CarListScreen> {
                   SizedBox(height: 24),
 
                   // Seats Filter
-                  _buildFilterSectionTitle('Jumlah Kursi'),
-                  SizedBox(height: 12),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: _seatsOptions.map((seats) {
-                      return FilterChip(
-                        label: Text(seats == 'All' ? 'Semua' : '$seats Kursi'),
-                        selected: _selectedSeats == seats,
-                        onSelected: (selected) {
-                          setState(() {
-                            _selectedSeats = selected ? seats : 'All';
-                          });
-                        },
-                        backgroundColor: AppTheme.primaryDark,
-                        selectedColor: AppTheme.accentColor.withOpacity(0.2),
-                        labelStyle: TextStyle(
-                          color: _selectedSeats == seats ? AppTheme.accentColor : AppTheme.textPrimary,
+                        _buildFilterSectionTitle('Jumlah Kursi'),
+                        SizedBox(height: 12),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: _seatsOptions.map((seats) {
+                            return FilterChip(
+                              label: Text(seats == 'All' ? 'Semua' : '$seats Kursi'),
+                              selected: _selectedSeats == seats,
+                              onSelected: (selected) {
+                                setState(() {
+                                  _selectedSeats = selected ? seats : 'All';
+                                });
+                              },
+                              backgroundColor: AppTheme.primaryDark,
+                              selectedColor: AppTheme.accentColor.withOpacity(0.2),
+                              labelStyle: TextStyle(
+                                color: _selectedSeats == seats ? AppTheme.accentColor : AppTheme.textPrimary,
+                              ),
+                              checkmarkColor: AppTheme.accentColor,
+                            );
+                          }).toList(),
                         ),
-                        checkmarkColor: AppTheme.accentColor,
-                      );
-                    }).toList(),
-                  ),
 
-                  SizedBox(height: 24),
+                        SizedBox(height: 24),
 
-                  // Price Range Filter
-                  _buildFilterSectionTitle('Rentang Harga'),
+                        // Price Range Filter
+                      _buildFilterSectionTitle('Rentang Harga'),
                   SizedBox(height: 12),
                   Column(
                     children: [
@@ -508,8 +485,8 @@ class _CarListScreenState extends State<CarListScreen> {
                         max: 5000000,
                         divisions: 10,
                         labels: RangeLabels(
-                          'Rp ${(_minPrice / 1000000).toStringAsFixed(1)}JT',
-                          'Rp ${(_maxPrice / 1000000).toStringAsFixed(1)}JT',
+                          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0).format(_minPrice),
+                          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0).format(_maxPrice),
                         ),
                         onChanged: (values) {
                           setState(() {
@@ -518,24 +495,24 @@ class _CarListScreenState extends State<CarListScreen> {
                           });
                         },
                         activeColor: AppTheme.accentColor,
-                        inactiveColor: AppTheme.textSecondary.withOpacity(0.3),
+                  inactiveColor: AppTheme.textSecondary.withOpacity(0.3),
+                ),
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0).format(_minPrice),
+                      style: TextStyle(
+                        color: AppTheme.textSecondary,
+                        fontSize: 12,
                       ),
-                      SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Rp ${(_minPrice / 1000000).toStringAsFixed(1)} JT',
-                            style: TextStyle(
-                              color: AppTheme.textSecondary,
-                              fontSize: 12,
-                            ),
-                          ),
-                          Text(
-                            'Rp ${(_maxPrice / 1000000).toStringAsFixed(1)} JT',
-                            style: TextStyle(
-                              color: AppTheme.textSecondary,
-                              fontSize: 12,
+                    ),
+                    Text(
+                      NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0).format(_maxPrice),
+                      style: TextStyle(
+                        color: AppTheme.textSecondary,
+                        fontSize: 12,
                             ),
                           ),
                         ],
@@ -767,18 +744,18 @@ class _CarListScreenState extends State<CarListScreen> {
                           Row(
                             children: [
                               _buildSpecItem(Icons.settings, car['transmission']),
-                              SizedBox(width: 5),
-                              _buildSpecItem(Icons.people, '${car['seats']} Seats'),
+                              SizedBox(width: 15),
+                              _buildSpecItem(Icons.people, '${car['seats']}'),
                             ],
                           ),
                           SizedBox(height: 12),
 
                           // Price
                           Text(
-                            'Rp ${(car['price'] / 1000000).toStringAsFixed(1)} JT / hari',
+                            NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0).format(car['price']) + ' / hari',
                             style: TextStyle(
                               color: AppTheme.accentColor,
-                              fontSize: 20,
+                              fontSize: 17,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

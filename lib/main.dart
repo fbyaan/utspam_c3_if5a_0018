@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:utspam_c3_if5a_0018/screens/edit_rental_screen.dart';
 import 'package:utspam_c3_if5a_0018/screens/profile_screen.dart';
 import 'package:utspam_c3_if5a_0018/screens/register_screen.dart';
+import 'package:utspam_c3_if5a_0018/screens/rental_detail_screen.dart';
 import 'package:utspam_c3_if5a_0018/screens/rental_form_screen.dart';
 import 'package:utspam_c3_if5a_0018/screens/rental_history_screen.dart';
 import 'package:utspam_c3_if5a_0018/theme/app_theme.dart';
 import 'package:utspam_c3_if5a_0018/screens/login_screen.dart';
 import 'package:utspam_c3_if5a_0018/screens/home_screen.dart'; 
 import 'package:utspam_c3_if5a_0018/screens/car_list_screen.dart';
+import 'package:utspam_c3_if5a_0018/utils/route_observer.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'utspam_c3_if5a_0018',
-      theme: AppTheme.darkTheme,
+      theme: AppTheme.darkTheme,  
       initialRoute: '/login',
       routes: {
         '/register': (context) => RegisterScreen(),
@@ -30,7 +34,13 @@ class MyApp extends StatelessWidget {
         '/rental-form': (context) => RentalFormScreen(),
         '/rental-history': (context) => RentalHistoryScreen(),
         '/profile': (context) => ProfileScreen(),
+        '/rental-detail': (context) => RentalDetailScreen(),
+        '/edit-rental': (context) => EditRentalScreen(),
       },
+       navigatorObservers: [
+        RouteObserverUtil.routeObserver,
+        // atau: CustomRouteObserver(),
+      ],
       debugShowCheckedModeBanner: false,
     );
   }
