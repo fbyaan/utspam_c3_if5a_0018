@@ -22,6 +22,9 @@ class _RentalFormScreenState extends State<RentalFormScreen> {
   User? _currentUser;
   double _totalCost = 0;
 
+  // Format number untuk harga
+  final NumberFormat _currencyFormat = NumberFormat.decimalPattern('id');
+
   @override
   void initState() {
     super.initState();
@@ -306,7 +309,7 @@ class _RentalFormScreenState extends State<RentalFormScreen> {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Rp ${_selectedCar!['price']} / hari',
+                  'Rp ${_currencyFormat.format(_selectedCar!['price'])} / hari',
                   style: TextStyle(
                     color: AppTheme.accentColor,
                     fontSize: 16,
@@ -510,7 +513,7 @@ class _RentalFormScreenState extends State<RentalFormScreen> {
               ),
               SizedBox(height: 4),
               Text(
-                'Rp $_totalCost',
+                'Rp ${_currencyFormat.format(_totalCost)}',
                 style: TextStyle(
                   color: AppTheme.accentColor,
                   fontSize: 24,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:utspam_c3_if5a_0018/models/rental_model.dart';
 import 'package:utspam_c3_if5a_0018/services/local_storage.dart';
 import 'package:utspam_c3_if5a_0018/theme/app_theme.dart';
@@ -13,6 +14,9 @@ class RentalDetailScreen extends StatefulWidget {
 class _RentalDetailScreenState extends State<RentalDetailScreen> {
   Rental? _rental;
   bool _isUpdating = false;
+
+  // Format number untuk harga
+  final NumberFormat _currencyFormat = NumberFormat.decimalPattern('id');
 
   @override
   void didChangeDependencies() {
@@ -100,7 +104,7 @@ class _RentalDetailScreenState extends State<RentalDetailScreen> {
     }
   }
 
-    void _editRental() {
+  void _editRental() {
     if (_rental != null && _rental!.status == RentalStatus.active) {
       Navigator.pushNamed(
         context,
@@ -296,7 +300,7 @@ class _RentalDetailScreenState extends State<RentalDetailScreen> {
                           _buildDetailRow('Nama Penyewa', _rental!.customerName),
                           _buildDetailRow('Lama Sewa', '${_rental!.duration} hari'),
                           _buildDetailRow('Tanggal Mulai', _rental!.formattedStartDate),
-                          _buildDetailRow('Total Biaya', 'Rp ${_rental!.totalCost}'),
+                          _buildDetailRow('Total Biaya', 'Rp ${_currencyFormat.format(_rental!.totalCost.toInt())}'),
                         ],
                       ),
                     ),

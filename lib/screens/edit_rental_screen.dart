@@ -22,6 +22,9 @@ class _EditRentalScreenState extends State<EditRentalScreen> {
   double _originalPricePerDay = 0;
   bool _isUpdating = false;
 
+  // Format number untuk harga
+  final NumberFormat _currencyFormat = NumberFormat.decimalPattern('id');
+
   @override
   void initState() {
     super.initState();
@@ -303,7 +306,7 @@ class _EditRentalScreenState extends State<EditRentalScreen> {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Rp ${_originalPricePerDay.toInt()} / hari',
+                  'Rp ${_currencyFormat.format(_originalPricePerDay.toInt())} / hari',
                   style: TextStyle(
                     color: AppTheme.accentColor,
                     fontSize: 16,
@@ -480,7 +483,7 @@ class _EditRentalScreenState extends State<EditRentalScreen> {
                 ),
               ),
               Text(
-                'Rp ${_rental!.totalCost.toInt()}',
+                'Rp ${_currencyFormat.format(_rental!.totalCost.toInt())}',
                 style: TextStyle(
                   color: AppTheme.textSecondary,
                   fontSize: 14,
@@ -501,7 +504,7 @@ class _EditRentalScreenState extends State<EditRentalScreen> {
                 ),
               ),
               Text(
-                'Rp ${_totalCost.toInt()}',
+                'Rp ${_currencyFormat.format(_totalCost.toInt())}',
                 style: TextStyle(
                   color: AppTheme.accentColor,
                   fontSize: 18,

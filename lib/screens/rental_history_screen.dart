@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:utspam_c3_if5a_0018/models/rental_model.dart';
 import 'package:utspam_c3_if5a_0018/services/local_storage.dart';
 import 'package:utspam_c3_if5a_0018/theme/app_theme.dart';
@@ -15,6 +16,9 @@ class _RentalHistoryScreenState extends State<RentalHistoryScreen> with RouteAwa
   List<Rental> _rentals = [];
   bool _isLoading = true;
   bool _isRefreshing = false;
+
+  // Format number untuk harga
+  final NumberFormat _currencyFormat = NumberFormat.decimalPattern('id');
 
   @override
   void initState() {
@@ -300,7 +304,7 @@ class _RentalHistoryScreenState extends State<RentalHistoryScreen> with RouteAwa
                                             style: Theme.of(context).textTheme.bodyMedium,
                                           ),
                                           Text(
-                                            'Rp ${rental.totalCost}',
+                                            'Rp ${_currencyFormat.format(rental.totalCost.toInt())}',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodyLarge
