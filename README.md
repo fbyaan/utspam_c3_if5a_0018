@@ -33,11 +33,9 @@ Aplikasi memiliki tampilan seperti berikut:
 |----|----|
 |![profile](https://github.com/user-attachments/assets/41c5d04e-ffec-4dac-a4e1-8dd048cd6c67)| ![daftar mobil](https://github.com/user-attachments/assets/205af18c-455b-49b4-a8fa-c9134afa2600)|![riwayat](https://github.com/user-attachments/assets/820d93dd-8a02-4922-9d60-05533275e850)|
 
-|detai penyewaan |edit penyewaan |
+| detai penyewaan | edit penyewaan |
 |----|----|
-|![detail penyewaan](https://github.com/user-attachments/assets/244e9f20-8775-4565-836c-f3f34e2a2521)
-|![edit penyewaan](https://github.com/user-attachments/assets/39066754-01c4-41d5-8d67-0077c1656889)
-|
+| ![detail penyewaan](https://github.com/user-attachments/assets/244e9f20-8775-4565-836c-f3f34e2a2521) | ![edit penyewaan](https://github.com/user-attachments/assets/39066754-01c4-41d5-8d67-0077c1656889) |
 
 
 ## 👨‍💻 Developer
