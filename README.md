@@ -27,16 +27,11 @@ Aplikasi memiliki tampilan seperti berikut:
 
 |membuat akun|login|tampilan utama|
 |----|----|
-|![registrasi](https://github.com/user-attachments/assets/652f3be6-e895-4811-ba57-c9bcbb500945)
-|![login](https://github.com/user-attachments/assets/607b0cfc-1b23-4407-b2f6-8077e3082dd4)
-|![home](https://github.com/user-attachments/assets/d58a1080-8b7a-4e9c-bebc-cd2be9c9dcfd)
-|
+|![registrasi](https://github.com/user-attachments/assets/652f3be6-e895-4811-ba57-c9bcbb500945)|![login](https://github.com/user-attachments/assets/607b0cfc-1b23-4407-b2f6-8077e3082dd4)|![home](https://github.com/user-attachments/assets/d58a1080-8b7a-4e9c-bebc-cd2be9c9dcfd)|
 
 |profile |Daftar mobil |Riwayat Pemesanan |
 |----|----|
-|![profile](https://github.com/user-attachments/assets/41c5d04e-ffec-4dac-a4e1-8dd048cd6c67)|
-![daftar mobil](https://github.com/user-attachments/assets/205af18c-455b-49b4-a8fa-c9134afa2600)|
-![riwayat](https://github.com/user-attachments/assets/820d93dd-8a02-4922-9d60-05533275e850)|
+|![profile](https://github.com/user-attachments/assets/41c5d04e-ffec-4dac-a4e1-8dd048cd6c67)| ![daftar mobil](https://github.com/user-attachments/assets/205af18c-455b-49b4-a8fa-c9134afa2600)|![riwayat](https://github.com/user-attachments/assets/820d93dd-8a02-4922-9d60-05533275e850)|
 
 |detai penyewaan |edit penyewaan |
 |----|----|
