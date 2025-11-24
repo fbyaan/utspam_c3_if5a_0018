@@ -25,9 +25,9 @@ Profil Pengguna: Menampilkan informasi akun yang sedang login.
 ## 📸 Screenshot
 Aplikasi memiliki tampilan seperti berikut:
 
-|membuat akun|login|tampilan utama|
+| membuat akun | login | tampilan utama |
 |----|----|
-|![registrasi](https://github.com/user-attachments/assets/652f3be6-e895-4811-ba57-c9bcbb500945)|![login](https://github.com/user-attachments/assets/607b0cfc-1b23-4407-b2f6-8077e3082dd4)|![home](https://github.com/user-attachments/assets/d58a1080-8b7a-4e9c-bebc-cd2be9c9dcfd)|
+| ![registrasi](https://github.com/user-attachments/assets/652f3be6-e895-4811-ba57-c9bcbb500945)| ![login](https://github.com/user-attachments/assets/607b0cfc-1b23-4407-b2f6-8077e3082dd4) | ![home](https://github.com/user-attachments/assets/d58a1080-8b7a-4e9c-bebc-cd2be9c9dcfd) |
 
 |profile |Daftar mobil |Riwayat Pemesanan |
 |----|----|
