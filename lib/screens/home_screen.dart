@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:utspam_c3_if5a_0018/models/user_model.dart';
 import 'package:utspam_c3_if5a_0018/services/local_storage.dart';
 import 'package:utspam_c3_if5a_0018/theme/app_theme.dart';
@@ -262,6 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildRecommendedCarsSection() {
     final recommendedCars = [
       {
+        'id': '1',
         'name': 'Land Rover Defender',
         'type': 'Luxury Off-Road',
         'price': 2200000,
@@ -270,6 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'image': 'assets/land_rover_defender.jpg',
       },
       {
+        'id': '2', 
         'name': 'Lexus GX 460',
         'type': 'Luxury Off-Road',
         'price': 1700000,
@@ -278,6 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'image': 'assets/lexus_gx_460.jpg',
       },
       {
+        'id': '3',
         'name': 'Ford Bronco Raptor',
         'type': 'Performance Off-Road',
         'price': 2100000,
@@ -338,148 +342,160 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCarCard(Map<String, dynamic> car) {
-    final imagePath = car['image'] as String?;
-    final isNetworkImage = imagePath != null && imagePath.startsWith('http');
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            '/rental-form',
-            arguments: car,
-          );
-        },
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 4),
-          decoration: BoxDecoration(
-            color: AppTheme.secondaryDark,
+        Widget _buildCarCard(Map<String, dynamic> car) {
+        final imagePath = car['image'] as String?;
+        final isNetworkImage = imagePath != null && imagePath.startsWith('http');
+        
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              // Gunakan navigasi yang sama seperti di CarListScreen
+              Navigator.pushNamed(
+                context,
+                '/rental-form',
+                arguments: car,
+              );
+            },
             borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: AppTheme.accentColor.withOpacity(0.08),
-                blurRadius: 12,
-                offset: Offset(0, 6),
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 4),
+              decoration: BoxDecoration(
+                color: AppTheme.secondaryDark,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppTheme.accentColor.withOpacity(0.08),
+                    blurRadius: 12,
+                    offset: Offset(0, 6),
+                  ),
+                ],
+                border: Border.all(color: AppTheme.accentColor.withOpacity(0.12)),
               ),
-            ],
-            border: Border.all(color: AppTheme.accentColor.withOpacity(0.12)),
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 120,
-                height: 90,
-                margin: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.08),
-                      blurRadius: 8,
-                      offset: Offset(0, 4),
+              child: Row(
+                children: [
+                  Container(
+                    width: 120,
+                    height: 90,
+                    margin: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.08),
+                          blurRadius: 8,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: isNetworkImage
-                    ? Image.network(
-                        imagePath!,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Icon(
-                          Icons.directions_car,
-                          size: 48,
-                          color: AppTheme.accentColor,
-                        ),
-                      )
-                    : Image.asset(
-                        imagePath ?? '',
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Icon(
-                          Icons.directions_car,
-                          size: 70,
-                          color: AppTheme.accentColor,
-                        ),
-                      ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        car['name'] as String,
-                        style: TextStyle(
-                          color: AppTheme.textPrimary,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        car['type'] as String,
-                        style: TextStyle(
-                          color: AppTheme.textSecondary,
-                          fontSize: 14,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        children: [
-                          _buildCarFeature(Icons.people_outline, '${car['seats']}'),
-                          SizedBox(width: 12),
-                          _buildCarFeature(Icons.settings, car['transmission'] as String),
-                          SizedBox(width: 12),
-                          _buildCarFeature(Icons.local_gas_station, 'Bensin'),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: isNetworkImage
+                        ? Image.network(
+                            imagePath!,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) => Icon(
+                              Icons.directions_car,
+                              size: 48,
+                              color: AppTheme.accentColor,
+                            ),
+                          )
+                        : Image.asset(
+                            imagePath ?? '',
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) => Icon(
+                              Icons.directions_car,
+                              size: 70,
+                              color: AppTheme.accentColor,
+                            ),
+                          ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 4),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Rp ${formatRupiah(car['price'])} / hari',
+                            car['name'] as String,
                             style: TextStyle(
-                              color: AppTheme.accentColor,
-                              fontSize: 13,
+                              color: AppTheme.textPrimary,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: AppTheme.accentColor,
-                              borderRadius: BorderRadius.circular(14),
+                          SizedBox(height: 4),
+                          Text(
+                            car['type'] as String,
+                            style: TextStyle(
+                              color: AppTheme.textSecondary,
+                              fontSize: 14,
                             ),
-                            child: Text(
-                              'Sewa',
-                              style: TextStyle(
-                                color: AppTheme.primaryDark,
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            children: [
+                              _buildCarFeature(Icons.people_outline, '${car['seats']}'),
+                              SizedBox(width: 12),
+                              _buildCarFeature(Icons.settings, car['transmission'] as String),
+                              SizedBox(width: 12),
+                              _buildCarFeature(Icons.local_gas_station, 'Bensin'),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Rp ${formatRupiah(car['price'])} / hari',
+                                style: TextStyle(
+                                  color: AppTheme.accentColor,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.accentColor,
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    // Gunakan navigasi yang sama seperti di CarListScreen
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/rental-form',
+                                      arguments: car,
+                                    );
+                                  },
+                                  child: Text(
+                                    'Sewa',
+                                    style: TextStyle(
+                                      color: AppTheme.primaryDark,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
-  }
+        );
+      }
   Widget _buildCarFeature(IconData icon, String text) {
     return Row(
       children: [
